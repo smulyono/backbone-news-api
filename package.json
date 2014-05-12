@@ -1,0 +1,17 @@
+{
+  "name": "backbone-news-api",
+  "version": "0.0.1",
+  "description": "## Description",
+  "main": "server.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sanny mulyono",
+  "license": "MIT",
+  "dependencies": {
+    "node-static-server": ">=0.0.4"
+  }
+}

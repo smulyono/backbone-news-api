@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+body {
+    background : #000;
+    color : #eee;
+    font-family : Helvetica, Arial, "Sans Serif";
+}
+    </style>
+</head>
+<body>
+    <h1>Test</h1>
+    <script src="../bower_components/requirejs/require.js"></script>
+    <script>
+        requirejs.config({
+            paths :{
+                "backbone" : "../bower_components/backbone/backbone",
+                "underscore": "../bower_components/underscore/underscore",
+                "jquery" : "../bower_components/jquery/jquery.min"
+            }
+        });
+    </script>
+    <script>
+    require(["../backbone.news.api"], function(napi){
+        console.log("all loaded!", napi);
+        console.log("getNews", napi.getNews(napi.SOURCE_YAHOO));
+    });
+    </script>
+</body>
+</html>

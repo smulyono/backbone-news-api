@@ -1,0 +1,32 @@
+{
+  "name": "backbone-news-api",
+  "version": "0.0.1",
+  "authors": [
+    "smulyono <smulyono@me.com>"
+  ],
+  "description": "Backbone Model / Collection for Google and Yahoo news",
+  "main": [
+    "backbone.news.api.js"
+  ],
+  "keywords": [
+    "backbone",
+    "news",
+    "google-news",
+    "yahoo-news",
+    "api"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.11",
+    "jquery": "~1.10",
+    "backbone": "~1.1.2"
+  }
+}
