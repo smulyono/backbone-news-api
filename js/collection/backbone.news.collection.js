@@ -5,15 +5,16 @@ define(["backbone"], function(Backbone){
         YQL_URL : "https://query.yahooapis.com/v1/public/yql?q=<%=query%>&format=<%=outputformat%>",
         YQL_SQL : "select * from rss where url=\"<%= qcondition %>\" <%= limits %>",
         // ** static top news rss url
-        YAHOO_TOP_NEWS_URL : "http://news.yahoo.com/rss/",
-        GOOGLE_TOP_NEWS_URL: "http://news.google.com/news?pz=1&cf=all&ned=us&hl=en&output=rss",
+        YAHOO_TOP_NEWS_URL : "http://news.yahoo.com/rss/<%=topic%>",
+        GOOGLE_TOP_NEWS_URL: "http://news.google.com/news?q=<%=query%>&geo=<%=geo%>&topic=<%=topic%>&hl=en&output=rss&",
 
         // **
         model : Backbone.News.Model,
+        // ** Header items information
         /**
         {
-            source : <google, yahoo, all>,
-            text   : <query>,
+            source : <google, yahoo>,
+            query  : <query>,
             lat    : Latitude,
             lang   : Langitude
         }
@@ -30,13 +31,20 @@ define(["backbone"], function(Backbone){
             } else {
                 _qcondition += this.YAHOO_TOP_NEWS_URL;
             }
+            var _tqcondition = _.template(_qcondition);
+            var _outCondition = _tqcondition({
+                query : this.query || "",
+                geo : this.geo || "",
+                topic : this.topic || ""
+            });
 
             var _sql = _.template(this.YQL_SQL);
             // Apply template
             var _outputSQL = _sql({
-                qcondition : _qcondition,
-                limits : ""
+                qcondition : _outCondition,
+                limits : this.limits || ""
             });
+            console.log(_outputSQL);
 
             this.url = _url({
                 query : encodeURIComponent(_outputSQL),
@@ -44,7 +52,11 @@ define(["backbone"], function(Backbone){
             });
         },
         parse : function(data){
-            console.log(data);
+            this.count  = data.query.count;
+            this.created= data.query.created;
+            this.lang = data.query.lang;
+
+            return data.query.results.item;
         }
     });
 });

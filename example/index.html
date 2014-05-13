@@ -9,10 +9,29 @@ body {
     color : #eee;
     font-family : Helvetica, Arial, "Sans Serif";
 }
+#newsContainer {
+    display:block;
+    width : 100%;
+    height : 100%;
+    border : solid 1px #ccc;
+}
+#newsContainer h3 {
+    border-bottom : solid 1px #efefef;
+}
+.news_item{
+    margin : 10px;
+    border : solid 1px #778787;
+}
+.news_item.title {font-size:20px; font-weight:500;}
+.news_item.description {font-size:14px; font-weight:200;}
+.news_item.link {font-size:12px; font-style:italic;}
+
     </style>
 </head>
 <body>
-    <h1>Test</h1>
+    <div id="newsContainer">
+
+    </div>
     <script src="../bower_components/requirejs/require.js"></script>
     <script>
         requirejs.config({
@@ -26,8 +45,41 @@ body {
     <script>
     require(["../backbone.news.api"], function(napi){
         console.log("all loaded!", napi);
-        console.log("getNews", napi.getNews(napi.SOURCE_YAHOO));
+
+        var news = napi.getNews({
+            source : napi.SOURCE_GOOGLE
+        });
+
+        news.fetch({
+            success:function(){
+                console.log("news loaded!", news.models);
+            }
+        });
+
     });
+    </script>
+    <script>
+    require(["../backbone.news.api"], function(napi){
+        console.log("start to draw backbone view");
+        var newEl = napi.draw({
+            source : napi.SOURCE_YAHOO,
+            limits : "limit 20",
+            template : _.template($("#news_template").text())
+        });
+        newEl.render();
+
+        $("#newsContainer").append($(newEl.el));
+
+    });
+    </script>
+    <script type="template" id="news_template">
+    <div class="news_item">
+        <ul>
+            <li class='title'><%= title %></li>
+            <li class='description'><%= description %></li>
+            <li class='link'><a href='<%= link %>'>source</a></li>
+        </ul>
+    </div>
     </script>
 </body>
 </html>

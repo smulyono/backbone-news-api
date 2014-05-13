@@ -9,13 +9,11 @@ also provide couple of presentation and helper methods.
 
 __Some available presentations__:
 
-* Cards View
 * List View
 
 __Helper Methods__:
 
-* Search news by source (google, yahoo, all)
 * Search news by query text
-* Search news by location (local news)
+* Search news with pagination (limit , offset) -- YQL
 
 ##

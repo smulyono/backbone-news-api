@@ -1,7 +1,7 @@
 {
   "name": "backbone-news-api",
   "version": "0.0.1",
-  "description": "## Description",
+  "description": "Backbone & Nodejs to retrieve news through YQL",
   "main": "server.js",
   "directories": {
     "example": "example"
